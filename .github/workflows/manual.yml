@@ -1,0 +1,33 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual E2E workflow
+run-name: Build - from the user @${{github.actor}} and event ${{github.event_name}}
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  build_job:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: step 1 Checkout 
+        uses: actions/checkout@v3.5.3
+    # Runs a single command using the runners shell
+      - name: Send greeting
+        run: echo "Hello ${{ inputs.name }}"
+        
+      - name: Setup Java JDK 11
+        uses: actions/setup-java@v1.4.4
+        with:
+          java-version:  '11'
+          cache: 'maven' 
+      - name: Run unit tests
+        run: mvn test
+      
