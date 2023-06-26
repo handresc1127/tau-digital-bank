@@ -15,3 +15,6 @@ jobs:
         
       - name: run unit test
         run: mvn test
+        
+      - name: show repository name
+        run: echo ${{ github.event.repository.name }}
