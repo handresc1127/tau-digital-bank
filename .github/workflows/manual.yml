@@ -55,3 +55,59 @@ jobs:
         uses: github/codeql-action/analyze@v2
         with:
           category: "/language:${{matrix.language}}"
+          
+  cleanUp_job:
+    needs: [build_job]
+    runs-on: ubuntu-latest
+    environment: UAT
+    steps: 
+      - name: "Clean up destination at ${{vars.UAT_IP}}"
+        uses: appleboy/ssh-action@master
+        with:
+         host: ${{vars.UAT_IP}}
+         port: ${{vars.UAT_PORT}}
+         username: ${{secrets.USER}}
+         password: ${{secrets.SSH_KEY}}
+         script: |
+           rm -rf ./deployment/*
+           rm -rf ${{vars.UAT_TOMCAT}}/digi*
+           
+  deployment_job:
+    needs: [cleanUp_job]
+    runs-on: ubuntu-latest
+    environment: UAT
+    steps:  
+    -  uses: actions/download-artifact@v2.1.1
+       with:
+         name: 'digibank.war'
+         path: './deploy'
+    -  run: ls -ltr ./deploy
+    -  run: ls -lah
+    -  name: "Deployment at ${{vars.UAT_IP}}"
+       uses: appleboy/scp-actio@master
+       with:
+         host: ${{vars.UAT_IP}}
+         port: ${{vars.UAT_PORT}}
+         username: ${{secrets.USER}}
+         password: ${{secrets.SSH_KEY}}
+         source: '.deploy/digibank.war'
+         target: 'deployment'
+
+  install_job:
+    needs: [deployment_job]
+    runs-on: ubuntu-latest
+    environment: UAT
+    steps:  
+      - name: "Installing the app in the server at ${{vars.UAT_IP}}"
+        uses: appleboy/ssh-action@master
+        with:
+         host: ${{vars.UAT_IP}}
+         port: ${{vars.UAT_PORT}}
+         username: ${{secrets.USER}}
+         password: ${{secrets.SSH_KEY}}
+         script: |
+           cp -f /home/ec2-user/deployment/deploy/digibank.war  ${{vars.UAT_TOMCAT}}
+           
+      - name: 'Sleep'
+        run: sleep 10s
+        shell: bash
