@@ -8,6 +8,7 @@ env:
   env_var: ${{ vars.ENV_CONTEXT_VAR }}
   DAY_OF_WEEK: Monday
   USE_VARIABLES: true
+  vars.USE_VARIABLES: true
 
 jobs:
   display-variables:
