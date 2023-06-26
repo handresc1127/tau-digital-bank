@@ -1,0 +1,17 @@
+name: show variables
+
+on:
+  workflow_dispatch:
+
+jobs:
+  variables_printing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: show event repository name
+        run: echo ${{ github.event.repository.name }}
+        
+      - name: show repository
+        run: echo ${{ github.repository }}
+        
+
+
