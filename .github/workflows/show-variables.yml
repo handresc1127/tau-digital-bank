@@ -6,6 +6,8 @@ on:
 env:
   # Setting an environment variable with the value of a configuration variable
   env_var: ${{ vars.ENV_CONTEXT_VAR }}
+  DAY_OF_WEEK: Monday
+  USE_VARIABLES: true
 
 jobs:
   display-variables:
