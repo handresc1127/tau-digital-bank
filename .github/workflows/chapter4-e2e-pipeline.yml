@@ -129,6 +129,7 @@ jobs:
 
     steps:
       - name: Trigger Workflow from e2e tests with Playwright
+      #github.token
         run: |
           curl -X POST \
           -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
