@@ -25,6 +25,6 @@ jobs:
           repo: ${{ github.event.repository.name }}
           pr_number: ${{ github.event.number }}
           #token: ${{ secrets.PAT_TOKEN }}
-          #token: ${{ github.token }}
-          token: ${{ secrets.pat }} # use "secrets." instead of "github."
+          token: ${{ github.token }}
+          #token: ${{ secrets.pat }} # use "secrets." instead of "github."
           
