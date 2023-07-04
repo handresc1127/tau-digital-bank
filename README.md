@@ -1,6 +1,6 @@
 [![nightly build at 11pm](https://github.com/handresc1127/tau-digital-bank/actions/workflows/nightly-build.yml/badge.svg)](https://github.com/handresc1127/tau-digital-bank/actions/workflows/nightly-build.yml)
 
-HACC
+Handsome ACC
 
 # Digital Bank
 
