@@ -18,7 +18,7 @@ jobs:
     name: Annotates pull request with metadata
     steps:
       - name: Annotate PR
-        uses: ${{github.repository_owner}}/tau-own-action-pull-request@main
+        uses: handresc1127/tau-own-action-pull-request@main
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
