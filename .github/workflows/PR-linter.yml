@@ -3,9 +3,12 @@ name: PR check naming convention
 on:
   pull_request:
     types: ['opened', 'edited', 'reopened', 'synchronize']
+  issue_comment:
+    types: ['created']
 
 jobs:
   pr-lint:
+    if: github.event.issue.pull_request || contains(github.event.comment.body, 'retest')
     runs-on: ubuntu-latest
     steps:
     - uses: seferov/pr-lint-action@master
@@ -14,6 +17,7 @@ jobs:
         error-message: 'Add Ticket ID to your title e.g. "TAU-1"' 
 
   scan-pr-changes:
+    if: github.event.issue.pull_request || contains(github.event.comment.body, 'retest')
     runs-on: ubuntu-latest
     name: Annotates pull request with metadata
     steps:
