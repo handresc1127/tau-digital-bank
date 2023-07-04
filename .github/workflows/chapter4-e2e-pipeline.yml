@@ -134,5 +134,5 @@ jobs:
           curl -X POST \
           -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/tau-github-actions-for-testing/tau-digital-bank-e2e-tests/dispatches \
+          ${{github.api_url}}/repos/${{github.repository}}/build-and-e2e-tests/dispatches \
           -d  '{"event_type": "trigger-tests", "client_payload" : { "sut" : "${{ vars.UAT_IP }}" } }'
