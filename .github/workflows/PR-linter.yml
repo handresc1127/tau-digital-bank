@@ -3,6 +3,8 @@ name: PR check naming convention
 on:
   pull_request:
     types: ['opened', 'edited', 'reopened', 'synchronize']
+  issue_comment:
+    types: ['created']
 
 jobs:
   pr-lint:
