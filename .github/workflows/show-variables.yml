@@ -42,13 +42,13 @@ jobs:
         
       - name: show repository
         run: echo ${{ github.repository }}
-      - name: show repository
+      - name: show repository and others
         run: |
-          echo ${{github.api_url}}  |
+          echo apiUrl ${{github.api_url}}  |
           echo https://api.github.com/repos/tau-github-actions-for-testing/tau-digital-bank-e2e-tests/dispatches |
-          echo ${{github.job}} |
-          echo ${{github.repository}} |
-          echo ${{github.repository_owner}}
+          echo job ${{github.job}} |
+          echo repo ${{github.repository}} |
+          echo repo owner ${{github.repository_owner}}
         
 
 
