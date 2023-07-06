@@ -14,6 +14,7 @@ jobs:
         error-message: 'Add Ticket ID to your title e.g. "TAU-1"' 
 
   scan-pr-changes:
+    permissions: write-all
     runs-on: ubuntu-latest
     name: Annotates pull request with metadata
     steps:
