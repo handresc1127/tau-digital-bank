@@ -1,7 +1,7 @@
 [![nightly build at 11pm](https://github.com/handresc1127/tau-digital-bank/actions/workflows/nightly-build.yml/badge.svg)](https://github.com/handresc1127/tau-digital-bank/actions/workflows/nightly-build.yml)
 
 Handsome ACC Testing actions.
-Hi, 
+Hi, a lot of issues
 
 # Digital Bank
 
