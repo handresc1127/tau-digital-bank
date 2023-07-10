@@ -11,11 +11,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Validate PR structure
+      env: 
+        FILE_NAME: "README.md"
       run: |
         # Add your validation commands here
         # Example: Check if a specific file exists in the PR
-        if ! git diff-tree --no-commit-id --name-only -r ${{ github.event.pull_request.head.sha }} | grep -q "path/to/file"; then
-          echo "Error: 'path/to/file' is missing in the PR."
+        if ! git diff-tree --no-commit-id --name-only -r ${{ github.event.pull_request.head.sha }} | grep -q "${{ env.FILE_NAME }}"; then
+          echo "Error: '${{ env.FILE_NAME }}' is missing in the PR."
           exit 1
         fi
         
