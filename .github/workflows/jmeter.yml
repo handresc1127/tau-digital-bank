@@ -8,6 +8,8 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+env:
+  FILE_UNDER_TEST: "Performance/sniffle.jmx"
 
 jobs:
   jmeter:
@@ -29,21 +31,25 @@ jobs:
           tar -xzf apache-jmeter-${{ env.JMETER_VERSION }}.tgz
           ls -lah
       - name: Install JMeter Plugins
+        env:
+          PLUGINS_MNG_V: "1.9"
+          CMD_RUNNER_V: "2.0"
         run: |
-          wget https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/1.9/jmeter-plugins-manager-1.9.jar
-          wget https://repo1.maven.org/maven2/kg/apc/cmdrunner/2.0/cmdrunner-2.0.jar
+          wget https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/${{ env.PLUGINS_MNG_V }}/jmeter-plugins-manager-${{ env.PLUGINS_MNG_V }}.jar
+          wget https://repo1.maven.org/maven2/kg/apc/cmdrunner/${{ env.CMD_RUNNER_V }}/cmdrunner-${{ env.CMD_RUNNER_V }}.jar
           grep -lir 'jmeter-plugins-manager' . | xargs mv -t apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext
           grep -lir 'cmdrunner' . | xargs mv -t apache-jmeter-${{ env.JMETER_VERSION }}/lib
           ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/lib
           ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext
-          grep -lir 'jmeter-plugins-manager' apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext | xargs java -cp apache-jmeter-${{ env.JMETER_VERSION }}//lib//ext//%s
+          java -cp apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext/jmeter-plugins-manager-${{ env.PLUGINS_MNG_V }}.jar
           cd apache-jmeter-${{ env.JMETER_VERSION }}/bin
+          ls -lah /
+          sh PluginsManagerCMD.sh install-for-jmx /home/path/${{ env.FILE_UNDER_TEST }}
           ls -lah
-          sh jmeter.sh --install-plugin jpgc-standard
           ls -lah ../lib/ext
       - name: Run JMeter tests
         run: |
           cd apache-jmeter-${{ env.JMETER_VERSION }}/bin
-          sh jmeter.sh -n -t path/Performance/sniffle.jmx -l test-results.jtl
+          sh jmeter.sh -n -t path/${{ env.FILE_UNDER_TEST }} -l test-results.jtl
           ls -lah
           ls -lah path
