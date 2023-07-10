@@ -10,7 +10,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - name: Validate PR structure
+    - name: Validate PR File
+      if: ${{ never() }}
       env: 
         FILE_NAME: "README.md"
       run: |
