@@ -6,8 +6,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  schedule:
-    - cron: '0 23 * * *'
   workflow_dispatch:
 
 
@@ -32,7 +30,8 @@ jobs:
           ls -lah
       - name: Install JMeter Plugins
         run: |
-          cd apache-jmeter-${{ env.JMETER_VERSION }}
+          cd apache-jmeter-${{ env.JMETER_VERSION }}/bin
+          ls -lah
           sh jmeter.sh --install-plugin jpgc-standard
           ls -lah
           ls -lah lib/ext
