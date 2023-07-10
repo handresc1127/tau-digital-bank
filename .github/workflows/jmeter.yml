@@ -30,7 +30,7 @@ jobs:
           ls -lah
       - name: Install JMeter Plugins
         run: |
-          wget https://jmeter-plugins.org/get/
+          wget https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/1.9/jmeter-plugins-manager-1.9.jar
           grep -lir 'jmeter-plugins-manager' . | xargs mv -t apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext
           ls -lah apache-jmeter-${{ env.JMETER_VERSION }}
           ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext
