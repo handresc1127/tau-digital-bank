@@ -32,13 +32,11 @@ jobs:
         run: |
           wget https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/1.9/jmeter-plugins-manager-1.9.jar
           grep -lir 'jmeter-plugins-manager' . | xargs mv -t apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext
-          ls -lah apache-jmeter-${{ env.JMETER_VERSION }}
           ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext
           cd apache-jmeter-${{ env.JMETER_VERSION }}/bin
           ls -lah
           sh jmeter.sh --install-plugin jpgc-standard
-          ls -lah
-          ls -lah lib/ext
+          ls -lah ../lib/ext
       - name: Run JMeter tests
         run: |
           cd apache-jmeter-${{ env.JMETER_VERSION }}/bin
