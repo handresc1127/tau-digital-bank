@@ -30,6 +30,10 @@ jobs:
           ls -lah
       - name: Install JMeter Plugins
         run: |
+          wget https://jmeter-plugins.org/get/
+          grep -lir 'jmeter-plugins-manager' . | xargs mv -t apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext
+          ls -lah apache-jmeter-${{ env.JMETER_VERSION }}
+          ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext
           cd apache-jmeter-${{ env.JMETER_VERSION }}/bin
           ls -lah
           sh jmeter.sh --install-plugin jpgc-standard
