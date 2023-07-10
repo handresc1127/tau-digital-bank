@@ -36,7 +36,7 @@ jobs:
           grep -lir 'cmdrunner' . | xargs mv -t apache-jmeter-${{ env.JMETER_VERSION }}/lib
           ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/lib
           ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext
-          grep -lir 'jmeter-plugins-manager' apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext | xargs java -cp apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext/%s
+          grep -lir 'jmeter-plugins-manager' apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext | xargs java -cp apache-jmeter-${{ env.JMETER_VERSION }}//lib//ext//%s
           cd apache-jmeter-${{ env.JMETER_VERSION }}/bin
           ls -lah
           sh jmeter.sh --install-plugin jpgc-standard
