@@ -41,7 +41,9 @@ jobs:
           grep -lir 'cmdrunner' . | xargs mv -t apache-jmeter-${{ env.JMETER_VERSION }}/lib
           ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/lib
           ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext
-          java -cp apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext/jmeter-plugins-manager-${{ env.PLUGINS_MNG_V }}.jar
+          echo "-------------------- Compiling File ------------------------------"
+          java -cp apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext/jmeter-plugins-manager-${{ env.PLUGINS_MNG_V }}.jar org.jmeterplugins.repository.PluginManagerCMDInstaller
+          echo "-------------------- File Created --------------------------------"
           cd apache-jmeter-${{ env.JMETER_VERSION }}/bin
           ls -lah /
           sh PluginsManagerCMD.sh install-for-jmx /home/path/${{ env.FILE_UNDER_TEST }}
