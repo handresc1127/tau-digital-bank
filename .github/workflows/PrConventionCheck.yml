@@ -10,20 +10,20 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - name: Validate PR File
-      if: ${{ never() }}
-      env: 
-        FILE_NAME: "README.md"
-      run: |
-        # Add your validation commands here
-        # Example: Check if a specific file exists in the PR
-        if ! git diff-tree --no-commit-id --name-only -r ${{ github.event.pull_request.head.sha }} | grep -q "${{ env.FILE_NAME }}"; then
-          echo "Error: '${{ env.FILE_NAME }}' is missing in the PR."
-          git diff-tree --no-commit-id --name-only -r ${{ github.event.pull_request.head.sha }}
-          exit 1
-        fi
+      
+#    - name: Validate PR File
+#      env: 
+#        FILE_NAME: "README.md"
+#      run: |
+#        # Add your validation commands here
+#        # Example: Check if a specific file exists in the PR
+#        if ! git diff-tree --no-commit-id --name-only -r ${{ github.event.pull_request.head.sha }} | grep -q "${{ env.FILE_NAME }}"; then
+#          echo "Error: '${{ env.FILE_NAME }}' is missing in the PR."
+#          git diff-tree --no-commit-id --name-only -r ${{ github.event.pull_request.head.sha }}
+#          exit 1
+#        fi       
+#        Add JIRA Ticket ID to your title e.g. "TAU-1"
         
-        Add JIRA Ticket ID to your title e.g. "TAU-1"
     - name: Title Regex
       env: 
         REGEX: '^TAU-\d+\s.+'
