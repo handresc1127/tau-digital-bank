@@ -29,8 +29,12 @@ jobs:
       env: 
         REGEX: '^TAU-\d+\s.+'
       run: |
+          echo "PR Title: ${{ github.event.pull_request.title }}"
+          echo "PR: ${{ github.event.pull_request }}"
+          echo "PR Head: ${{ github.event.pull_request.head }}"
+          echo "PR Sha: ${{ github.event.pull_request.head.sha }}"
           # Get the PR title
-          pr_title=$(git log --format=%s -n 1 ${{ github.event.pull_request.head.sha }})
+          pr_title=${{ github.event.pull_request.title }}
 
           # Perform regex validation
           if ! [[ $pr_title =~ ${{ env.REGEX }} ]]; then
