@@ -33,7 +33,7 @@ jobs:
       - name: Install JMeter Plugins
         env:
           PLUGINS_MNG_V: "1.9"
-          CMD_RUNNER_V: "2.0"
+          CMD_RUNNER_V: "2.3"
         run: |
           wget https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/${{ env.PLUGINS_MNG_V }}/jmeter-plugins-manager-${{ env.PLUGINS_MNG_V }}.jar
           wget https://repo1.maven.org/maven2/kg/apc/cmdrunner/${{ env.CMD_RUNNER_V }}/cmdrunner-${{ env.CMD_RUNNER_V }}.jar
