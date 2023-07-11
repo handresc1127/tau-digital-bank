@@ -24,13 +24,6 @@ jobs:
 #        fi       
 #        Add JIRA Ticket ID to your title e.g. "TAU-1"
         
-    - name: Title Regex
-      env: 
-        REGEX: '^TAU-\d+\s.+'
-      run: |
-        echo "Error: 'path/to/file' is missing in the PR."
-        title-regex: '^TAU-\d+\s.+'
-        error-message: 'Add JIRA Ticket ID to your title e.g. "TAU-1"' 
         
     - name: Validate PR Title
       env: 
@@ -41,6 +34,6 @@ jobs:
 
           # Perform regex validation
           if ! [[ $pr_title =~ ${{ env.REGEX }} ]]; then
-            echo "Error: PR title does not match the required pattern. Add please the JIRA Ticket - XXX"
+            echo "Error: PR title does not match the required pattern. Add please the JIRA Ticket -  ${{ env.REGEX }}"
             exit 1
           fi
