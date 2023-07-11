@@ -50,9 +50,29 @@ jobs:
           ls -lah
           echo "-------------------- File Created --------------------------------"
           sh apache-jmeter-${{ env.JMETER_VERSION }}/bin/PluginsManagerCMD.sh install-for-jmx ${{ env.FILE_UNDER_TEST }}
+          echo "------------------ Plugins Downloaded ----------------------------"
           ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/bin
-          ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/bin/lib/ext
+          ls -lah apache-jmeter-${{ env.JMETER_VERSION }}/lib/ext
       - name: Run JMeter tests
         run: |
-          sh apache-jmeter-${{ env.JMETER_VERSION }}/bin/jmeter.sh -n -t ${{ env.FILE_UNDER_TEST }} -l test-results.jtl
+          sh apache-jmeter-${{ env.JMETER_VERSION }}/bin/jmeter.sh -n -t ${{ env.FILE_UNDER_TEST }} -l test-results.jtl  -e -o output
           ls -lah
+          ls -lah output
+
+      - name: Archive JMeter results
+        uses: actions/upload-artifact@v2
+        with:
+          name: jmeter-results
+          path: test-results.jtl
+
+      - name: Archive JMeter logs
+        uses: actions/upload-artifact@v2
+        with:
+          name: jmeter-logs
+          path: jmeter.log
+
+      - name: Archive JMeter output
+        uses: actions/upload-artifact@v2
+        with:
+          name: jmeter-html-output
+          path: output
