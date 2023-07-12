@@ -36,24 +36,22 @@ jobs:
           echo "PR Sha: ${{ github.event.pull_request.head.sha }}"
           echo "------------------------------------------------"
           echo "------------------------------------------------"
-          echo "PR Sha: ${{ github.event.pull_request.number }}: The number of the pull request."
-          echo "PR Sha: ${{ github.event.pull_request.title }}: The title of the pull request."
-          echo "PR Sha: ${{ github.event.pull_request.body }}: The body content of the pull request."
-          echo "PR Sha: ${{ github.event.pull_request.head }}: The branch or commit being merged into the base branch."
-          echo "PR Sha: ${{ github.event.pull_request.head.ref }}: The branch or commit being merged into the base branch."
-          echo "PR Sha: ${{ github.event.pull_request.head.sha }}: The branch or commit being merged into the base branch."
-          echo "PR Sha: ${{ github.event.pull_request.head.repo }}: The branch or commit being merged into the base branch."
-          echo "PR Sha: ${{ github.event.pull_request.base }}: The branch receiving the changes."
-          echo "PR Sha: ${{ github.event.pull_request.user }}: The user who created the pull request."
-          echo "PR Sha: ${{ github.event.pull_request.labels }}: An array of labels applied to the pull request."
-          echo "PR Sha: ${{ github.event.pull_request.merged }}: Indicates whether the pull request has been merged."
-          echo "PR Sha: ${{ github.event.pull_request.merged_by }}: The user who merged the pull request."
-          echo "PR Sha: ${{ github.event.pull_request.merge_commit_sha }}: The SHA of the merge commit."
+          echo "PR number: ${{ github.event.pull_request.number }}: The number of the pull request."
+          echo "PR title: ${{ github.event.pull_request.title }}: The title of the pull request."
+          echo "PR body: ${{ github.event.pull_request.body }}: The body content of the pull request."
+          echo "PR head: ${{ github.event.pull_request.head }}: The branch or commit being merged into the base branch."
+          echo "PR head ref: ${{ github.event.pull_request.head.ref }}: The branch or commit being merged into the base branch."
+          echo "PR head sha: ${{ github.event.pull_request.head.sha }}: The branch or commit being merged into the base branch."
+          echo "PR head repo: ${{ github.event.pull_request.head.repo }}: The branch or commit being merged into the base branch."
+          echo "PR base: ${{ github.event.pull_request.base }}: The branch receiving the changes."
+          echo "PR user: ${{ github.event.pull_request.user }}: The user who created the pull request."
+          echo "PR labels: ${{ github.event.pull_request.labels }}: An array of labels applied to the pull request."
+          echo "PR merged: ${{ github.event.pull_request.merged }}: Indicates whether the pull request has been merged."
+          echo "PR merged_by: ${{ github.event.pull_request.merged_by }}: The user who merged the pull request."
+          echo "PR merge_commit_sha: ${{ github.event.pull_request.merge_commit_sha }}: The SHA of the merge commit."
           echo "------------------------------------------------"
-          # Get the PR title
-          pr_title=${{ github.event.pull_request.title }}
           # Perform regex validation
-          if [[ $pr_title =~ ${{ env.REGEX }} ]]; then
+          if [[ ${{ github.event.pull_request.title }} =~ ${{ env.REGEX }} ]]; then
             echo "Matched!"
           else
             echo "Error: PR title does not match the required pattern. Add please the JIRA Ticket -  ${{ env.REGEX }}"
