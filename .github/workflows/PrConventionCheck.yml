@@ -35,6 +35,7 @@ jobs:
           echo "PR Head: ${{ github.event.pull_request.head }}"
           echo "PR Sha: ${{ github.event.pull_request.head.sha }}"
           echo "------------------------------------------------"
+          echo "REGEX: env.REGEX"
           echo "------------------------------------------------"
           echo "PR number: ${{ github.event.pull_request.number }}: The number of the pull request."
           echo "PR title: ${{ github.event.pull_request.title }}: The title of the pull request."
@@ -51,7 +52,7 @@ jobs:
           echo "PR merge_commit_sha: ${{ github.event.pull_request.merge_commit_sha }}: The SHA of the merge commit."
           echo "------------------------------------------------"
           # Perform regex validation
-          if [[ ${{ github.event.pull_request.title }} =~ ${{ env.REGEX }} ]]; then
+          if [[ "${{ github.event.pull_request.title }}" =~ ${{ env.REGEX }} ]]; then
             echo "Matched!"
           else
             echo "Error: PR title does not match the required pattern. Add please the JIRA Ticket -  ${{ env.REGEX }}"
